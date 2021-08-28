@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ingrese los valores:<span class="badge bg-secondary">X,Y</span></h1>
+  
+    <span class="badge rounded-pill bg-secondary">X</span><input type="number" id="1"> <br>
+    <span class="badge rounded-pill bg-secondary">Y</span><input type="numeber" id="2"> <br>
+    <br>
+    <button onclick="Agregar()" class="btn btn-secondary">Agregar</button>
+    <button onclick="Distancia()" class="btn btn-secondary">Distancia</button> <br>
+    <div class="alert alert-dark" role="alert">
+        Cordenadas:
+      </div>
+    <p id="3"> <br></p> <br> <br>
+    <div class="alert alert-dark" role="alert">
+        Distancia:
+      </div>
+    <p id="4"></p>
+
+
+
+    <script>
+class Inventario{
+    constructor(){ 
+        this.inicio=null
+    }
+    Agregar(nuevo){
+    
+        if (this.inicio===null){
+            this.inicio=nuevo}
+            else{
+                let a=this.inicio
+                 while(a.sig!=null){
+                 a=a.sig}
+                 a.sig=nuevo}
+    }
+    }
+    
+class puntos{
+        constructor(x,y){
+            this.x=x
+            this.y=y
+            this.cor="("+this.x+","+this.y+")"
+            this.sig=null
+        }
+        dis(){
+            let tt=(this.sig.x-this.x)*(this.sig.x-this.x)
+            let ttt=(this.sig.y-this.y)*(this.sig.y-this.y)
+            return(Math.sqrt(tt+ttt))
+        }
+        }
+        Todos=new Inventario()
+
+
+        function Agregar(){
+            x=document.getElementById("1").value
+            y=document.getElementById("2").value
+            punt = new puntos(x,y)
+            re=document.getElementById("3").innerHTML
+            document.getElementById("3").innerHTML=re +"<br>"+ punt.cor
+            Todos.Agregar(punt)
+        }
+        function Distancia(){
+            let a=Todos.inicio
+            let res=0
+                 while(a.sig!=null){
+                res=res+(a.dis())
+                a=a.sig
+                }
+                document.getElementById("4").innerHTML=res
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<style>
+	body {
+  	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	}
+  .productoCard{
+  	background:cyan;
+    border: 1px solid blue;
+    width:70%;
+    padding: 3px;
+    margin:10px;
+  }
+  .alerta{
+  	background:gray;
+    width:50%;
+    padding:5px;
+    text-shadow:2px 2px 1px white;
+  }
+</style>
+<h1>Welcome to SyncFiddle</h1>
+<p>Crear un pequeño control de inventario</p>
+<div id='container'>
+  <div id='app'>
+		<form>
+      <label for='txtCodigo'>
+        Codigo:<input type='text' id='txtCodigo'>
+      </label><br>
+      <label for='txtNombre'>
+        Nombre:<input type='text' id='txtNombre'>
+      </label><br>
+      <label for='txtPrecio'>
+        Precio $:<input type='number' id='txtPrecio'>
+      </label><br>
+      <label for='txtCantidad'>
+        Cantidad:<input type='number' id='txtCantidad'>
+      </label><br>
+      <button type='button' id='btnAdd'>Agregar</button>
+      <button type='reset'>Cancelar</button>
+    </form>
+    <div id='listaProductos'></div>
+  </div>
+</div>
+<script>
+// You can use the console window at the bottom
+// display
+// font-shadow
+// transformaciones y animaciones en css... w3schools
+// position
+
+  class Producto{
+    constructor(codigo, nombre, precio, cantidad){
+      this.codigo=codigo;
+      this.nombre=nombre;
+      this.precio=precio;
+      this.cantidad=cantidad;
+    }
+    info(){
+      return this.codigo + "- " + this.nombre + 
+        " $" + this.precio;
+    }
+    //1 lapiz 10.00 5
+    /*<div id='cod1'> eso lo formamos abajo
+      <h3>1 - lapiz</h3>
+      <p>(5) $10.00 </p>
+    </div>
+    */
+    infoHtml(){
+      return `   
+        <div class ='productoCard' id='cod${this.codigo}'>
+          <h3>${this.codigo} - ${this.nombre}</h3>
+          <p>(${this.cantidad}) $ ${this.precio}</p>
+        </div>
+      `;
+    }
+  }
+  
+  class Inventario{
+    constructor(){
+      this.datos=new Map();
+    }
+    agregar(nuevo){
+      this.datos.set(nuevo.codigo,nuevo)
+    }
+  }
+  
+  class Interfaz{
+    agregarProducto(nuevo){
+      const lista=document.getElementById('listaProductos');
+      let producto=document.createElement('div');
+      producto.innerHTML=nuevo.infoHtml();
+      lista.appendChild(producto);
+    }
+    mensaje(mensaje){
+      const cont=document.getElementById('container');
+      const app=document.getElementById('app');
+      
+      const msg=document.createElement('div');
+      msg.className='alerta';
+      msg.hidden=false
+      msg.appendChild(document.createTextNode(mensaje));
+      
+      cont.insertBefore(msg,app);
+      
+      //setTimeout(callback(), tiempo ms    ); //eventos
+      setTimeout( function(){
+      	document.getElementById('alerta').hidden=true;
+      }  ,3000);
+    }
+  }
+  
+  
+  //Interacción con el usuario
+  let almacen=new Inventario();
+  let ui=new Interfaz();
+  let btnAdd=document.getElementById('btnAdd');
+  btnAdd.addEventListener('click',()=>{
+  	let codigo=document.getElementById('txtCodigo').value;
+    let nombre=document.getElementById('txtNombre').value;
+    let precio=document.getElementById('txtPrecio').value;
+    let cantidad=document.getElementById('txtCantidad').value;
+    let nuevo=new Producto(codigo,nombre,precio,cantidad);
+    almacen.agregar(nuevo)
+    ui.agregarProducto(nuevo);
+    console.log(nuevo.info());
+    ui.mensaje('Se agrego el producto ' + nuevo.nombre);
+  });
+  
+  
+
+</script>

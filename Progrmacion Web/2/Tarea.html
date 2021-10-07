@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="app.js"></script>
+    <title>Document</title>
+</head>
+<body>
+  <h1>Menú</h1>
+   <button onclick=Pusuraios()>Agregar usuarios</button>
+   <button onclick=Pconsulta()>Consultas</button>
+   <button onclick=Plista()>Listado</button> 
+
+
+   <div id="Usuario" style="display:none" >
+    <h2>Agregar usuario</h2>
+    <h3>Personal information</h3>
+    <label>
+        Id:<br><input type='text' id='txtId'><br>
+      </label>
+      <label>
+        Name:<br><input type='text' id='txtName'>
+      </label><br>
+      <label>
+        Username:<br><input type='text' id='txtUsername'>
+      </label><br>
+      <label>
+        Email:<br><input type='text' id='txtEmail'>
+      </label><br>
+      <label>
+        Phone:<br><input type='number' id='txtPhone'>
+      </label><br>
+      <label>
+        Website:<br><input type='text' id='txtWebsite'>
+      </label><br>
+      <br>
+
+      <h3>Company data</h3>
+      <label>
+        Name:<br><input type='text' id='txtNameC' >
+      </label><br>
+      <label>
+          Street:<br><input type='text' id='txtStreet'>
+        </label><br>
+        <label>
+          City:<br><input type='text' id='txtCity'>
+        </label><br>
+        <label>
+          Zipcode:<br><input type='text' id='txtZipcode'>
+        </label><br>
+        <br>
+        <button onclick=Agregar()>Agregar</button>
+      </div>
+
+      <div id="Consulta" style="display:none">
+        <h2>Colultas</h2>
+        <select id="select">
+          <option >Selecione una persona</option>
+        </select>
+        <h3 id="conencabezado" style="display:none">Usuario:</h3>
+        <p id="parra"></p>
+      </div>
+      
+      <div id="Listado" style="display:none">
+        <h2>Listado</h2>
+        <p id="lis"></p>
+      </div>
+
+</body>
+</html>
